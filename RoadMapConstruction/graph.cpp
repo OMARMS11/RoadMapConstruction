@@ -39,12 +39,6 @@ string Edge::getVertex2()
 
 void Graph::PrimMinimumSpanningTree()
 {
-	///
-	/// kjljl
-	/// lklk
-	/// 
-	/// klklk
-	///
 	vector <string> visitedVerticies;
 	queue<Edge> edgesOrder;
 	vector<Edge> unusedAdjacentEdges;
@@ -169,5 +163,63 @@ void Graph::PrimMinimumSpanningTree()
 }
 void Graph::BFStraversal()
 {
+	adjacencyList.insert(make_pair("a", list<Edge>()));
 
+	adjacencyList.insert(make_pair("b", list<Edge>()));
+
+	adjacencyList.insert(make_pair("c", list<Edge>()));
+
+	adjacencyList.insert(make_pair("d", list<Edge>()));
+
+	adjacencyList.insert(make_pair("e", list<Edge>()));
+
+	adjacencyList.insert(make_pair("f", list<Edge>()));
+
+	adjacencyList["a"].push_back(Edge("a", "b", 4));
+	adjacencyList["a"].push_back(Edge("a", "c", 4));
+
+	adjacencyList["b"].push_back(Edge("a", "b", 4));
+	adjacencyList["b"].push_back(Edge("b", "c", 2));
+
+	adjacencyList["c"].push_back(Edge("a", "c", 4));
+	adjacencyList["c"].push_back(Edge("b", "c", 2));
+	adjacencyList["c"].push_back(Edge("d", "c", 3));
+	adjacencyList["c"].push_back(Edge("e", "c", 2));
+	adjacencyList["c"].push_back(Edge("f", "c", 4));
+
+	adjacencyList["d"].push_back(Edge("d", "c", 3));
+	adjacencyList["d"].push_back(Edge("d", "f", 3));
+
+	adjacencyList["e"].push_back(Edge("e", "c", 2));
+	adjacencyList["e"].push_back(Edge("e", "f", 3));
+
+	adjacencyList["f"].push_back(Edge("f", "c", 4));
+	adjacencyList["f"].push_back(Edge("d", "f", 3));
+	adjacencyList["f"].push_back(Edge("e", "f", 3));
+
+	queue<string> nodes;
+	nodes.push(adjacencyList.begin()->first);
+
+	unordered_map<string, bool> visited;
+	visited[adjacencyList.begin()->first] = true;
+
+	while (!nodes.empty())
+	{
+		string node = nodes.front();
+		cout << node << endl;
+		nodes.pop();
+		for (auto i = adjacencyList[node].begin(); i != adjacencyList[node].end(); i++)
+		{
+			if (!visited[i->getVertex1()])
+			{
+				nodes.push(i->getVertex1());
+				visited[i->getVertex1()] = true;
+			}
+			if (!visited[i->getVertex2()])
+			{
+				nodes.push(i->getVertex2());
+				visited[i->getVertex2()] = true;
+			}
+		}
+	}
 }
